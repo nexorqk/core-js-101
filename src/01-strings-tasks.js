@@ -198,9 +198,20 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  // return width + height;
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  let res = '';
+  for (let i = 0; i < height; i += 1) {
+    if (i === 0) {
+      res += `┌${width > 2 ? '─'.repeat(width - 2) : ''}┐\n`;
+    }
+    if (i !== 0 && i + 1 !== height) {
+      res += `│${width > 2 ? ' '.repeat(width - 2) : ''}│\n`;
+    }
+    if (i + 1 === height) {
+      res += `└${width > 2 ? '─'.repeat(width - 2) : ''}┘\n`;
+    }
+  }
+  return res;
 }
 
 /**
@@ -219,8 +230,65 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const rot13 = {
+    A: 'N',
+    B: 'O',
+    C: 'P',
+    D: 'Q',
+    E: 'R',
+    F: 'S',
+    G: 'T',
+    H: 'U',
+    I: 'V',
+    J: 'W',
+    K: 'X',
+    L: 'Y',
+    M: 'Z',
+    N: 'A',
+    O: 'B',
+    P: 'C',
+    Q: 'D',
+    R: 'E',
+    S: 'F',
+    T: 'G',
+    U: 'H',
+    V: 'I',
+    W: 'J',
+    X: 'K',
+    Y: 'L',
+    Z: 'M',
+    a: 'n',
+    b: 'o',
+    c: 'p',
+    d: 'q',
+    e: 'r',
+    f: 's',
+    g: 't',
+    h: 'u',
+    i: 'v',
+    j: 'w',
+    k: 'x',
+    l: 'y',
+    m: 'z',
+    n: 'a',
+    o: 'b',
+    p: 'c',
+    q: 'd',
+    r: 'e',
+    s: 'f',
+    t: 'g',
+    u: 'h',
+    v: 'i',
+    w: 'j',
+    x: 'k',
+    y: 'l',
+    z: 'm',
+  };
+
+  return Array.from(str)
+    .map((item) => (rot13[item] ? rot13[item] : item))
+    .join('');
 }
 
 /**
@@ -236,8 +304,8 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  return typeof value === 'string' || typeof { ...value }['0'] === 'string';
 }
 
 /**
@@ -264,8 +332,63 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const cardsArr = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+
+  return cardsArr.indexOf(value);
 }
 
 module.exports = {
